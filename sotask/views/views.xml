@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="so_view">
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <form string="SO" class="S_O_T">
+                    <sheet>
+                        <group>
+                            <field name="customer_id"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                        <notebook>
+                            <page string="Order Line">
+                                <dev>
+                                    <field name="line_ids">
+                                        <tree editable="bottom">
+                                            <field name="product"/>
+                                            <field name="price"/>
+                                            <field name="tax"/>
+                                            <field name="quantity"/>
+                                            <field name="subtotal" sum="Total"/>
+                                            <field name="link_id" invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </dev>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="so_action">
+            <field name="name">SO</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">form,tree</field>
+        </record>
+
+
+        <menuitem name="SO" id="so_menu"
+                  parent="sale.sale_order_menu"
+                  action="so_action"
+                  sequence="100"/>
+    </data>
+</odoo>
